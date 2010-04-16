@@ -28,15 +28,22 @@ import java.util.regex.Matcher;
  * @author nicerobot
  * 
  */
-public class MatcherIterator implements Iterable<String> {
+public class MatcherIterator implements Iterator<String>, Iterable<String> {
 
   private final Matcher e;
 
   /**
    * @param e
    */
-  public MatcherIterator (final Matcher e) {
-    this.e = e;
+  public MatcherIterator (final Matcher matcher) {
+    this.e = matcher;
+  }
+
+  /* (non-Javadoc)
+   * @see java.util.Iterator#hasNext()
+   */
+  public boolean hasNext () {
+    return MatcherIterator.this.e.find();
   }
 
   /* (non-Javadoc)
@@ -44,39 +51,29 @@ public class MatcherIterator implements Iterable<String> {
    */
   @Override
   public Iterator<String> iterator () {
-
-    return new Iterator<String>() {
-
-      /* (non-Javadoc)
-       * @see java.util.Iterator#hasNext()
-       */
-      public boolean hasNext () {
-        return MatcherIterator.this.e.find();
-      }
-
-      /* (non-Javadoc)
-       * @see java.util.Iterator#next()
-       */
-      public String next () {
-        return MatcherIterator.this.e.group();
-      }
-
-      /**
-       * @param group
-       * @return
-       */
-      @SuppressWarnings ("unused")
-      public String next (final int group) {
-        return MatcherIterator.this.e.group(group);
-      }
-
-      /* (non-Javadoc)
-       * @see java.util.Iterator#remove()
-       */
-      public void remove () {
-        throw new UnsupportedOperationException();
-      }
-
-    };
+    return this;
   }
+
+  /* (non-Javadoc)
+   * @see java.util.Iterator#next()
+   */
+  public String next () {
+    return MatcherIterator.this.e.group();
+  }
+
+  /**
+   * @param group
+   * @return
+   */
+  public String next (final int group) {
+    return MatcherIterator.this.e.group(group);
+  }
+
+  /* (non-Javadoc)
+   * @see java.util.Iterator#remove()
+   */
+  public void remove () {
+    throw new UnsupportedOperationException();
+  }
+
 }

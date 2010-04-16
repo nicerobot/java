@@ -30,7 +30,7 @@ import java.util.Iterator;
  * @author nicerobot
  * 
  */
-public class StringEterator<T> implements Iterable<String> {
+public class StringEterator<T> implements Iterator<String>, Iterable<String> {
 
   /**
 	 * 
@@ -40,8 +40,15 @@ public class StringEterator<T> implements Iterable<String> {
   /**
    * @param e
    */
-  public StringEterator (final Enumeration<T> e) {
-    this.e = e;
+  public StringEterator (final Enumeration<T> et) {
+    this.e = et;
+  }
+
+  /* (non-Javadoc)
+   * @see java.util.Iterator#hasNext()
+   */
+  public boolean hasNext () {
+    return StringEterator.this.e.hasMoreElements();
   }
 
   /* (non-Javadoc)
@@ -49,30 +56,21 @@ public class StringEterator<T> implements Iterable<String> {
    */
   @Override
   public Iterator<String> iterator () {
-
-    return new Iterator<String>() {
-
-      /* (non-Javadoc)
-       * @see java.util.Iterator#hasNext()
-       */
-      public boolean hasNext () {
-        return StringEterator.this.e.hasMoreElements();
-      }
-
-      /* (non-Javadoc)
-       * @see java.util.Iterator#next()
-       */
-      public String next () {
-        return String.valueOf(StringEterator.this.e.nextElement());
-      }
-
-      /* (non-Javadoc)
-       * @see java.util.Iterator#remove()
-       */
-      public void remove () {
-        throw new UnsupportedOperationException();
-      }
-
-    };
+    return this;
   }
+
+  /* (non-Javadoc)
+   * @see java.util.Iterator#next()
+   */
+  public String next () {
+    return String.valueOf(StringEterator.this.e.nextElement());
+  }
+
+  /* (non-Javadoc)
+   * @see java.util.Iterator#remove()
+   */
+  public void remove () {
+    throw new UnsupportedOperationException();
+  }
+
 }

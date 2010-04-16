@@ -28,49 +28,47 @@ import java.util.Iterator;
  * @author nicerobot
  * 
  */
-public class Eterator<T> implements Iterable<T> {
+public class Eterator<T> implements Iterator<T>, Iterable<T> {
 
-	/**
+  /**
 	 * 
 	 */
-	private final Enumeration<T> e;
+  private final Enumeration<T> e;
 
-	/**
-	 * @param e
-	 */
-	public Eterator (final Enumeration<T> e) {
-		this.e = e;
-	}
+  /**
+   * @param e
+   */
+  public Eterator (final Enumeration<T> e) {
+    this.e = e;
+  }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Iterable#iterator()
-	 */
-	@Override
-	public Iterator<T> iterator () {
+  /* (non-Javadoc)
+   * @see java.util.Iterator#hasNext()
+   */
+  public boolean hasNext () {
+    return this.e.hasMoreElements();
+  }
 
-		return new Iterator<T>() {
+  /* (non-Javadoc)
+   * @see java.lang.Iterable#iterator()
+   */
+  @Override
+  public Iterator<T> iterator () {
+    return this;
+  }
 
-			/* (non-Javadoc)
-			 * @see java.util.Iterator#hasNext()
-			 */
-			public boolean hasNext () {
-				return Eterator.this.e.hasMoreElements();
-			}
+  /* (non-Javadoc)
+   * @see java.util.Iterator#next()
+   */
+  public T next () {
+    return this.e.nextElement();
+  }
 
-			/* (non-Javadoc)
-			 * @see java.util.Iterator#next()
-			 */
-			public T next () {
-				return Eterator.this.e.nextElement();
-			}
+  /* (non-Javadoc)
+   * @see java.util.Iterator#remove()
+   */
+  public void remove () {
+    throw new UnsupportedOperationException();
+  }
 
-			/* (non-Javadoc)
-			 * @see java.util.Iterator#remove()
-			 */
-			public void remove () {
-				throw new UnsupportedOperationException();
-			}
-
-		};
-	}
 }
