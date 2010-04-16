@@ -1,0 +1,15 @@
+<project name="propertylist" default="test" basedir=".">
+	<target name="compile">
+		<javac srcdir="." classpath="."/>
+	</target>
+	<target name="test" depends="compile">
+		<java classname="com.propertylistTest.propertylistTest" fork="true" failonerror="true"/>
+	</target>
+	<target name="clean">
+		<delete>
+			<fileset dir=".">
+				<include name="**/*.class"/>
+			</fileset>
+		</delete>
+	</target>
+</project>

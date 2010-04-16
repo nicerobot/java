@@ -1,0 +1,21 @@
+<project name="checksum" default="checksum" basedir=".">
+
+  <fileset dir="." id="checksum.files">
+    <include name="**/*.txt"/>
+  </fileset>
+
+	<target name="checksum">
+		<truncate file="fail-wrong-checksum.txt">
+		</truncate>
+  	<checksum algorithm="sha1" format="MD5SUM">
+  	  <fileset refid="checksum.files"/>
+  	</checksum>
+    <checksum algorithm="md5" format="MD5SUM">
+      <fileset refid="checksum.files"/>
+    </checksum>
+	  <concat destfile="fail-wrong-checksum.txt">
+	  	<fileset dir="." includes="*.sha1"></fileset>
+		</concat>
+	</target>
+
+</project>

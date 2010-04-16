@@ -1,0 +1,3 @@
+package org.nicerobot.patterns;
+
+

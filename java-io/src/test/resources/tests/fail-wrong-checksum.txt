@@ -1,0 +1,4 @@
+3f786850e387550fdab836ed7e6dc881de23001b *a.txt
+89e6c98d92887913cadf06b2adb97f26cde4849b *b.txt
+2b66fd261ee5c6cfc8de7fa466bab600bcfe4f69 *c.txt
+da39a3ee5e6b4b0d3255bfef95601890afd80709 *fail-wrong-checksum.txt
