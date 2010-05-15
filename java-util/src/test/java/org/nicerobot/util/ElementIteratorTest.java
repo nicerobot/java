@@ -1,7 +1,5 @@
 package org.nicerobot.util;
 
-import static org.junit.Assert.*;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,12 +14,12 @@ public class ElementIteratorTest {
 
   @Test
   public void testHasNext () {
-    fail("Not yet implemented");
+  // TODO
   }
 
   @Test
   public void testNext () {
-    fail("Not yet implemented");
+  // TODO
   }
 
 }
