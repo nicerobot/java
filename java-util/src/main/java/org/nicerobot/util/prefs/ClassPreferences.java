@@ -5,10 +5,11 @@ import java.lang.reflect.Field;
 
 public class ClassPreferences {
 
-	public static void process (final Class<?> class_) {
-		for (final Field f : class_.getFields()) {
-			final Annotation p = f.getAnnotation(Preference.class);
-		}
-	}
+  public static void process (final Class<?> class_) {
+    for (final Field f : class_.getFields()) {
+      @SuppressWarnings ("unused")
+      final Annotation p = f.getAnnotation(Preference.class);
+    }
+  }
 
 }

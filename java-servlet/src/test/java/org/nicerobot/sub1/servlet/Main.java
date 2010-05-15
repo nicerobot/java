@@ -29,4 +29,9 @@ import javax.servlet.http.HttpServlet;
  */
 public class Main extends HttpServlet {
 
+  /**
+   * 
+   */
+  private static final long serialVersionUID = -7520527777742473109L;
+
 }

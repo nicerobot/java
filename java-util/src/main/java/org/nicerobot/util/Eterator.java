@@ -38,7 +38,7 @@ public class Eterator<T> implements Iterator<T>, Iterable<T> {
   /**
    * @param e
    */
-  public Eterator (final Enumeration<T> e) {
+  public Eterator (@SuppressWarnings ("hiding") final Enumeration<T> e) {
     this.e = e;
   }
 

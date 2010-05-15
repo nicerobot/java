@@ -38,7 +38,7 @@ class ColoredPoint extends Point {
 
   private final Color color;
 
-  public ColoredPoint (final int x, final int y, final Color color) {
+  public ColoredPoint (final int x, final int y, @SuppressWarnings ("hiding") final Color color) {
     super(x, y);
     this.color = color;
   }
@@ -89,6 +89,7 @@ public class Equals {
   /**
    * @param args
    */
+  @SuppressWarnings ("boxing")
   public static void main (final String[] args) {
 
     System.out.format("Point : Point\n\n");
@@ -204,7 +205,7 @@ class Point {
   private int x;
   private int y;
 
-  public Point (final int x, final int y) {
+  public Point (@SuppressWarnings ("hiding") final int x, @SuppressWarnings ("hiding") final int y) {
     this.x = x;
     this.y = y;
   }
@@ -256,11 +257,11 @@ class Point {
     return result;
   }
 
-  public void setX (final int x) { // Problematic
+  public void setX (@SuppressWarnings ("hiding") final int x) { // Problematic
     this.x = x;
   }
 
-  public void setY (final int y) {
+  public void setY (@SuppressWarnings ("hiding") final int y) {
     this.y = y;
   }
 }

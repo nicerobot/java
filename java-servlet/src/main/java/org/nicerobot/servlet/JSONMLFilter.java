@@ -46,34 +46,34 @@ import javax.xml.transform.stream.StreamSource;
  */
 class CharResponseWrapper extends HttpServletResponseWrapper {
 
-	/**
+  /**
 	 * 
 	 */
-	private final CharArrayWriter output;
+  private final CharArrayWriter output;
 
-	/**
-	 * @param response
-	 */
-	public CharResponseWrapper (final HttpServletResponse response) {
-		super(response);
-		this.output = new CharArrayWriter();
-	}
+  /**
+   * @param response
+   */
+  public CharResponseWrapper (final HttpServletResponse response) {
+    super(response);
+    this.output = new CharArrayWriter();
+  }
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.ServletResponseWrapper#getWriter()
-	 */
-	@Override
-	public PrintWriter getWriter () {
-		return new PrintWriter(this.output);
-	}
+  /* (non-Javadoc)
+   * @see javax.servlet.ServletResponseWrapper#getWriter()
+   */
+  @Override
+  public PrintWriter getWriter () {
+    return new PrintWriter(this.output);
+  }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString () {
-		return this.output.toString();
-	}
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
+  @Override
+  public String toString () {
+    return this.output.toString();
+  }
 }
 
 /**
@@ -82,72 +82,73 @@ class CharResponseWrapper extends HttpServletResponseWrapper {
  */
 public class JSONMLFilter implements Filter {
 
-	/**
+  /**
 	 * 
 	 */
-	private FilterConfig filterConfig = null;
+  private FilterConfig filterConfig = null;
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.Filter#destroy()
-	 */
-	public void destroy () {
-		this.filterConfig = null;
-	}
+  /* (non-Javadoc)
+   * @see javax.servlet.Filter#destroy()
+   */
+  public void destroy () {
+    this.filterConfig = null;
+  }
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)
-	 */
-	public void doFilter (final ServletRequest request, final ServletResponse response,
-			final FilterChain chain) throws IOException, ServletException {
-		String contentType;
-		String styleSheet;
-		final String type = request.getParameter("type");
-		if (type == null || type.equals("")) {
-			contentType = "text/html";
-			styleSheet = "/xml/html.xsl";
-		} else {
-			if (type.equals("xml")) {
-				contentType = "text/plain";
-				styleSheet = "/xml/xml.xsl";
-			} else {
-				contentType = "text/html";
-				styleSheet = "/xml/html.xsl";
-			}
-		}
-		response.setContentType(contentType);
-		final String stylePath = this.filterConfig.getServletContext().getRealPath(styleSheet);
+  /* (non-Javadoc)
+   * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)
+   */
+  public void doFilter (final ServletRequest request, final ServletResponse response,
+      final FilterChain chain) throws IOException, ServletException {
+    String contentType;
+    String styleSheet;
+    final String type = request.getParameter("type");
+    if ((type == null) || type.equals("")) {
+      contentType = "text/html";
+      styleSheet = "/xml/html.xsl";
+    } else {
+      if (type.equals("xml")) {
+        contentType = "text/plain";
+        styleSheet = "/xml/xml.xsl";
+      } else {
+        contentType = "text/html";
+        styleSheet = "/xml/html.xsl";
+      }
+    }
+    response.setContentType(contentType);
+    final String stylePath = this.filterConfig.getServletContext().getRealPath(styleSheet);
 
-		final Source styleSource = new StreamSource(stylePath);
+    final Source styleSource = new StreamSource(stylePath);
 
-		final PrintWriter out = response.getWriter();
-		final CharResponseWrapper responseWrapper =
-				new CharResponseWrapper((HttpServletResponse) response);
-		chain.doFilter(request, responseWrapper);
+    final PrintWriter out = response.getWriter();
+    final CharResponseWrapper responseWrapper =
+        new CharResponseWrapper((HttpServletResponse) response);
+    chain.doFilter(request, responseWrapper);
 
-		// Get response from servlet
-		final StringReader sr = new StringReader(responseWrapper.toString());
-		final Source xmlSource = new StreamSource(sr);
+    // Get response from servlet
+    final StringReader sr = new StringReader(responseWrapper.toString());
+    final Source xmlSource = new StreamSource(sr);
 
-		try {
-			final TransformerFactory transformerFactory = TransformerFactory.newInstance();
-			final Transformer transformer = transformerFactory.newTransformer(styleSource);
-			final CharArrayWriter caw = new CharArrayWriter();
-			final StreamResult result = new StreamResult(caw);
-			transformer.transform(xmlSource, result);
-			response.setContentLength(caw.toString().length());
-			out.write(caw.toString());
-		} catch (final Exception ex) {
-			out.println(ex.toString());
-			out.write(responseWrapper.toString());
-		}
+    try {
+      final TransformerFactory transformerFactory = TransformerFactory.newInstance();
+      final Transformer transformer = transformerFactory.newTransformer(styleSource);
+      final CharArrayWriter caw = new CharArrayWriter();
+      final StreamResult result = new StreamResult(caw);
+      transformer.transform(xmlSource, result);
+      response.setContentLength(caw.toString().length());
+      out.write(caw.toString());
+    } catch (final Exception ex) {
+      out.println(ex.toString());
+      out.write(responseWrapper.toString());
+    }
 
-	}
+  }
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
-	 */
-	public void init (final FilterConfig filterConfig) throws ServletException {
-		this.filterConfig = filterConfig;
-	}
+  /* (non-Javadoc)
+   * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
+   */
+  public void init (@SuppressWarnings ("hiding") final FilterConfig filterConfig)
+      throws ServletException {
+    this.filterConfig = filterConfig;
+  }
 
 }

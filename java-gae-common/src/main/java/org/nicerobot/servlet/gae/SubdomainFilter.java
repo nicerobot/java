@@ -34,46 +34,48 @@ import javax.servlet.ServletResponse;
  * @author nicerobot
  * 
  */
+@SuppressWarnings ("boxing")
 public class SubdomainFilter implements Filter {
-	private static Integer count = 1;
-	/**
+  private static Integer count = 1;
+  /**
 	 * 
 	 */
-	private FilterConfig filterConfig = null;
+  private FilterConfig filterConfig = null;
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.Filter#destroy()
-	 */
-	public void destroy () {
-		this.filterConfig = null;
-	}
+  /* (non-Javadoc)
+   * @see javax.servlet.Filter#destroy()
+   */
+  public void destroy () {
+    this.filterConfig = null;
+  }
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)
-	 */
-	public void doFilter (final ServletRequest request, final ServletResponse response,
-			final FilterChain chain) throws IOException, ServletException {
-		if (this.filterConfig == null) {
-			return;
-		}
-		SubdomainFilter.count =
-				(Integer) this.filterConfig.getServletContext().getAttribute("hitCounter");
-		if (null == SubdomainFilter.count) {
-			SubdomainFilter.count = 1;
-		} else {
-			SubdomainFilter.count++;
-		}
-		this.filterConfig.getServletContext().setAttribute("hitCounter", SubdomainFilter.count);
+  /* (non-Javadoc)
+   * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)
+   */
+  public void doFilter (final ServletRequest request, final ServletResponse response,
+      final FilterChain chain) throws IOException, ServletException {
+    if (this.filterConfig == null) {
+      return;
+    }
+    SubdomainFilter.count =
+        (Integer) this.filterConfig.getServletContext().getAttribute("hitCounter");
+    if (null == SubdomainFilter.count) {
+      SubdomainFilter.count = 1;
+    } else {
+      SubdomainFilter.count++;
+    }
+    this.filterConfig.getServletContext().setAttribute("hitCounter", SubdomainFilter.count);
 
-		chain.doFilter(request, response);
-		response.getWriter().print("\n" + SubdomainFilter.count);
-	}
+    chain.doFilter(request, response);
+    response.getWriter().print("\n" + SubdomainFilter.count);
+  }
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
-	 */
-	public void init (final FilterConfig filterConfig) throws ServletException {
-		this.filterConfig = filterConfig;
-	}
+  /* (non-Javadoc)
+   * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
+   */
+  public void init (@SuppressWarnings ("hiding") final FilterConfig filterConfig)
+      throws ServletException {
+    this.filterConfig = filterConfig;
+  }
 
 }

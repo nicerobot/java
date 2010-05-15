@@ -24,58 +24,11 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
-      <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
-      <type>jar</type>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>javax.mail</groupId>
-      <artifactId>mail</artifactId>
-      <version>1.4.3</version>
-    </dependency>
-    <dependency>
-    	<groupId>com.google.gdata</groupId>
-    	<artifactId>gdata-client</artifactId>
-    	<version>1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.google.gdata</groupId>
-      <artifactId>gdata-media</artifactId>
-      <version>1.0</version>
-    </dependency>
-    <dependency>
-    	<groupId>com.google.gdata</groupId>
-    	<artifactId>gdata-docs</artifactId>
-    	<version>3.0</version>
-    </dependency>
-    <dependency>
-    	<groupId>com.google.gdata</groupId>
-    	<artifactId>gdata-core</artifactId>
-    	<version>1.0</version>
-    </dependency>
-    <dependency>
-    	<groupId>com.google.common</groupId>
-    	<artifactId>google-collect</artifactId>
-    	<version>1.0-rc1</version>
-    </dependency>
-    <dependency>
     	<groupId>org.bouncycastle</groupId>
     	<artifactId>bcpg-jdk16</artifactId>
     	<version>1.45</version>
     	<type>jar</type>
     	<scope>compile</scope>
-    </dependency>
-    <dependency>
-    	<groupId>org.lobobrowser</groupId>
-    	<artifactId>lobo</artifactId>
-    	<version>0.98.4</version>
-    </dependency>
-    <dependency>
-    	<groupId>org.lobobrowser</groupId>
-    	<artifactId>lobo-pub</artifactId>
-    	<version>0.98.4</version>
     </dependency>
     <dependency>
     	<groupId>org.nicerobot</groupId>

@@ -49,13 +49,15 @@ public class Keys {
     }
     _skeyfactory = skf;
 
-    String name = null;
+    char[] name = null;
     try {
-      name = String.format("%s/%s", InetAddress.getLocalHost(), System.getProperty("user.name"));
+      name =
+          String.format("%s/%s", InetAddress.getLocalHost(), System.getProperty("user.name"))
+                .toCharArray();
     } catch (final UnknownHostException e) {
       e.printStackTrace();
     }
-    _namec = name.toCharArray();
+    _namec = name;
 
   }
 
@@ -63,6 +65,7 @@ public class Keys {
    * @param alias
    * @return
    */
+  @SuppressWarnings ("boxing")
   private static char[] passwordPrompt (final String alias) {
     final JPasswordField jpf = new JPasswordField();
     final JOptionPane jop =

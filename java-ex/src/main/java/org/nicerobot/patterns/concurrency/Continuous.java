@@ -15,6 +15,7 @@ class A extends Continuous {
     return this.value;
   }
 
+  @SuppressWarnings ("boxing")
   @Override
   public void run () {
     while (!done) {
@@ -30,7 +31,7 @@ class A extends Continuous {
     }
   }
 
-  public synchronized void setValue (final int value) {
+  public synchronized void setValue (@SuppressWarnings ("hiding") final int value) {
     this.value = value;
   }
 
@@ -45,6 +46,7 @@ class C extends A {
     return this.more;
   }
 
+  @SuppressWarnings ("boxing")
   @Override
   public void run () {
     while (!done) {
@@ -63,7 +65,7 @@ class C extends A {
     }
   }
 
-  public synchronized void setMore (final int more) {
+  public synchronized void setMore (@SuppressWarnings ("hiding") final int more) {
     this.more = more;
   }
 }
@@ -92,6 +94,7 @@ public class Continuous extends Thread {
 
   }
 
+  @SuppressWarnings ("boxing")
   @Override
   public String toString () {
     return String.format("\u001b[%d;0H%s %d %%d\u001b[K\u001b[0;3H", SerialNum.get() + 1,
@@ -100,6 +103,7 @@ public class Continuous extends Thread {
 }
 
 class Main extends Continuous {
+  @SuppressWarnings ("boxing")
   @Override
   public void run () {
 

@@ -28,12 +28,12 @@ public class XMLNodeWriter implements Closeable, Flushable {
   private final Writer out; // the stream to send output to
 
   /** Initialize the output stream */
-  public XMLNodeWriter (final OutputStream out) {
+  public XMLNodeWriter (@SuppressWarnings ("hiding") final OutputStream out) {
     this(new BufferedWriter(new OutputStreamWriter(out)));
   }
 
   /** Initialize the output stream */
-  public XMLNodeWriter (final Writer out) {
+  public XMLNodeWriter (@SuppressWarnings ("hiding") final Writer out) {
     this.out = out;
   }
 
@@ -154,7 +154,7 @@ public class XMLNodeWriter implements Closeable, Flushable {
           final StringBuilder sb = new StringBuilder();
           final Text textNode = (Text) node;
           final String text = textNode.getData().trim(); // Strip off space
-          if (text != null && text.length() > 0) {
+          if ((text != null) && (text.length() > 0)) {
             sb.append(indent).append(this.escape(text)).append("\n"); // print text
           }
           this.out.write(sb.toString()); // print text

@@ -1,5 +1,6 @@
 package org.nicerobot.cli;
 
+@SuppressWarnings ("boxing")
 enum Command {
   add("add an element"), remove("remove an element"), gc("request garbage collection"), quit("exit"), exit(
       "exit"), help("this help"),
@@ -36,7 +37,7 @@ enum Command {
     return readLine("> ");
   }
 
-  public static Command readLine (final String prompt) {
+  public static Command readLine (@SuppressWarnings ("unused") final String prompt) {
     final String command = System.console().readLine("> ");
     return Command.valueOfSubstring(command);
   }
@@ -49,7 +50,8 @@ enum Command {
     return valueOfSubstring(value, 1, def);
   }
 
-  public static Command valueOfSubstring (final String value, final int min) {
+  public static Command valueOfSubstring (final String value,
+      @SuppressWarnings ("unused") final int min) {
     return valueOfSubstring(value, 1, unknown);
   }
 
@@ -77,11 +79,11 @@ enum Command {
 
   private Command () {}
 
-  private Command (final boolean isCommand) {
+  private Command (@SuppressWarnings ("hiding") final boolean isCommand) {
     this.isCommand = isCommand;
   }
 
-  private Command (final String description) {
+  private Command (@SuppressWarnings ("hiding") final String description) {
     this.description = description;
   }
 
@@ -96,6 +98,7 @@ public class Prompt extends Thread {
     new Prompt().start();
   }
 
+  @SuppressWarnings ("fallthrough")
   @Override
   public void run () {
 

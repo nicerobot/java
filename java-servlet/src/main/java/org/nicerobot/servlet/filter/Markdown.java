@@ -39,32 +39,32 @@ import javax.servlet.ServletResponse;
  */
 public class Markdown implements Filter {
 
-	private FilterConfig filterConfig;
+  @SuppressWarnings ("unused")
+  private FilterConfig filterConfig;
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.Filter#destroy()
-	 */
-	@Override
-	public void destroy () {
-		this.filterConfig = null;
-	}
+  /* (non-Javadoc)
+   * @see javax.servlet.Filter#destroy()
+   */
+  @Override
+  public void destroy () {
+    this.filterConfig = null;
+  }
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)
-	 */
-	@SuppressWarnings ("unchecked")
-	@Override
-	public void doFilter (final ServletRequest req_, final ServletResponse resp_,
-			final FilterChain chain_) throws IOException, ServletException {
-		chain_.doFilter(req_, resp_);
-	}
+  /* (non-Javadoc)
+   * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)
+   */
+  @Override
+  public void doFilter (final ServletRequest req_, final ServletResponse resp_,
+      final FilterChain chain_) throws IOException, ServletException {
+    chain_.doFilter(req_, resp_);
+  }
 
-	/* (non-Javadoc)
-	 * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
-	 */
-	@Override
-	public void init (final FilterConfig config_) throws ServletException {
-		this.filterConfig = config_;
-	}
+  /* (non-Javadoc)
+   * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
+   */
+  @Override
+  public void init (final FilterConfig config_) throws ServletException {
+    this.filterConfig = config_;
+  }
 
 }

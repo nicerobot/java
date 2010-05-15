@@ -26,7 +26,7 @@ public class Inner {
   private class ClassInner implements Any {
     private final String t;
 
-    public ClassInner (final String s) {
+    public ClassInner (@SuppressWarnings ("hiding") final String s) {
       this.t = s;
       System.out.format("inside: %s%n", s);
     }
@@ -98,6 +98,7 @@ public class Inner {
   /**
    * Define and initialize s using an anonymous inner initializer.
    */
+  @SuppressWarnings ("unused")
   private final Set<String> s = new HashSet<String>(3) {
     {
       this.add("one");
@@ -118,9 +119,10 @@ public class Inner {
   private Any methodClass (final String x) {
     class MethodInner implements Any {
       private final String t;
+      @SuppressWarnings ("hiding")
       protected Set<String> s = null;
 
-      public MethodInner (final String s) {
+      public MethodInner (@SuppressWarnings ("hiding") final String s) {
         this.t = s;
         System.out.format("inside: %s : %s%n", s, x);
       }

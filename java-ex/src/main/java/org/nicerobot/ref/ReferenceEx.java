@@ -22,7 +22,7 @@ public class ReferenceEx extends Thread {
   private static class Data {
     private final String name;
 
-    public Data (final String name) {
+    public Data (@SuppressWarnings ("hiding") final String name) {
       this.name = name;
     }
 
@@ -36,6 +36,7 @@ public class ReferenceEx extends Thread {
     private final Reference<Set<Integer>> data =
         new SoftReference<Set<Integer>>(new HashSet<Integer>(), softDataQueue);
 
+    @SuppressWarnings ("boxing")
     public FatSoftData (final String name) {
       super(name);
       final Set<Integer> s = this.data.get();
@@ -51,6 +52,7 @@ public class ReferenceEx extends Thread {
   }
 
   private static class MapThread extends Thread {
+    @SuppressWarnings ("boxing")
     @Override
     public void run () {
       boolean done = false;

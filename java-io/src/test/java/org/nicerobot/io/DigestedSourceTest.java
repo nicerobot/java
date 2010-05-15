@@ -46,45 +46,45 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith (Parameterized.class)
 public class DigestedSourceTest {
 
-	static {
-		System.setProperty("java.util.logging.config.file", "target/test-classes/logging.properties");
-	}
+  static {
+    System.setProperty("java.util.logging.config.file", "target/test-classes/logging.properties");
+  }
 
-	private final File file;
+  @Parameters
+  public static Collection<Object[]> data () throws FileNotFoundException {
+    return FileTester.data("t[xs]t$", "tests");
+  }
 
-	public DigestedSourceTest (final File file) {
-		this.file = file;
-	}
+  @BeforeClass
+  public static void setUpBeforeClass () throws Exception {}
 
-	@Before
-	public void setUp () throws Exception {}
+  @AfterClass
+  public static void tearDownAfterClass () throws Exception {}
 
-	@After
-	public void tearDown () throws Exception {}
+  private final File file;
 
-	@Test
-	public void testFile () throws DigestException, IOException {
-		if (Pattern.matches(".*/fail-.*", this.file.toString())) {
-			try {
-				new DigestedSource(this.file);
-				Assert.fail("Should throw exception: " + this.file);
-			} catch (final Exception e) {
-				return;
-			}
-		} else {
-			new DigestedSource(this.file);
-		}
+  public DigestedSourceTest (@SuppressWarnings ("hiding") final File file) {
+    this.file = file;
+  }
 
-	}
+  @Before
+  public void setUp () throws Exception {}
 
-	@Parameters
-	public static Collection<Object[]> data () throws FileNotFoundException {
-		return FileTester.data("t[xs]t$", "tests");
-	}
+  @After
+  public void tearDown () throws Exception {}
 
-	@BeforeClass
-	public static void setUpBeforeClass () throws Exception {}
+  @Test
+  public void testFile () throws DigestException, IOException {
+    if (Pattern.matches(".*/fail-.*", this.file.toString())) {
+      try {
+        new DigestedSource(this.file);
+        Assert.fail("Should throw exception: " + this.file);
+      } catch (final Exception e) {
+        return;
+      }
+    } else {
+      new DigestedSource(this.file);
+    }
 
-	@AfterClass
-	public static void tearDownAfterClass () throws Exception {}
+  }
 }

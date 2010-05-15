@@ -33,20 +33,20 @@ import java.util.Iterator;
  */
 public class Iteratorable<T> implements Iterable<T> {
 
-	private final Iterator<T> i;
+  private final Iterator<T> i;
 
-	/**
-	 * @param i
-	 */
-	public Iteratorable (final Iterator<T> i) {
-		this.i = i;
-	}
+  /**
+   * @param i
+   */
+  public Iteratorable (@SuppressWarnings ("hiding") final Iterator<T> i) {
+    this.i = i;
+  }
 
-	/* (non-Javadoc)
-	 * @see java.lang.Iterable#iterator()
-	 */
-	@Override
-	public Iterator<T> iterator () {
-		return this.i;
-	}
+  /* (non-Javadoc)
+   * @see java.lang.Iterable#iterator()
+   */
+  @Override
+  public Iterator<T> iterator () {
+    return this.i;
+  }
 }

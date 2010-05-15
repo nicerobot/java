@@ -13,12 +13,13 @@ import java.text.ParsePosition;
 @SuppressWarnings ("serial")
 public class PropertyFormat extends Format {
 
+  @SuppressWarnings ("unused")
   private String pattern = null;
 
   /**
    * @param pattern
    */
-  public PropertyFormat (final String pattern) {
+  public PropertyFormat (@SuppressWarnings ("hiding") final String pattern) {
     if (null == pattern) {
       throw new NullPointerException("pattern must not be null");
     }

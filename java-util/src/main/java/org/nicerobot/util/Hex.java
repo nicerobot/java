@@ -26,14 +26,19 @@ package org.nicerobot.util;
  * 
  */
 public class Hex {
-	public static String valueOf (final byte buf[]) {
-		if (null == buf) {
-			return null;
-		}
-		final StringBuilder sb = new StringBuilder(buf.length * 2);
-		for (final byte element : buf) {
-			sb.append(String.format("%02X", element & 0xff));
-		}
-		return sb.toString();
-	}
+  @SuppressWarnings ("boxing")
+  public static String valueOf (final byte buf[]) {
+    if (null == buf) {
+      return null;
+    }
+    final StringBuilder sb = new StringBuilder(buf.length * 2);
+    for (final byte b : buf) {
+      sb.append(String.format("%02X", b & 0xff));
+    }
+    return sb.toString();
+  }
+
+  public static String valueOf (final Byteable o) {
+    return valueOf(o.toByteArray());
+  }
 }
