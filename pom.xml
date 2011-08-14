@@ -65,7 +65,5 @@
   	<module>java-google</module>
   	<module>java-info</module>
   	<module>java-security</module>
-  	<module>java-browser</module>
-  	<module>java-ui</module>
   </modules>
 </project>
